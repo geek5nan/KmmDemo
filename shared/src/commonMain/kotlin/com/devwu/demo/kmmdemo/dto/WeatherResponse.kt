@@ -5,7 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherResponse(
-    val results: List<WeatherResult>
+    val results: List<WeatherResult>,
+    val testStr: String? = null,
+    val testInt: Int? = null,
+    val testLong: Long? = null,
+    val testBoolean: Boolean? = null,
+    val testFloat: Float? = null
 )
 
 @Serializable
