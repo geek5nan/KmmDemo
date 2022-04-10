@@ -30,9 +30,9 @@ class Greeting {
         // 拦截器
         plugin(HttpSend).intercept { request ->
             request.parameter("key", "SSSLquKonsbcNF9Gm") // API 密钥
-            request.parameter("language", "zh-Hans")     // API 国际化
-            request.parameter("unit", "c")               // API 数据单位， c 表示摄氏度
-            execute(request)                             // 执行请求
+            request.parameter("language", "zh-Hans")      // API 国际化
+            request.parameter("unit", "c")                // API 数据单位， c 表示摄氏度
+            execute(request)                              // 执行请求
         }
     }
 
