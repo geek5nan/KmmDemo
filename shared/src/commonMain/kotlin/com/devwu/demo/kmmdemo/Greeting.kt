@@ -45,6 +45,20 @@ class Greeting {
         return response.bodyAsText()
     }
 
+    fun funcWithParams1(someKey: String) {
+        println(someKey)
+    }
+
+    fun funcWithParam2(someKey: String?) {
+        println(someKey ?: "NULL")
+    }
+
+    fun funcWithLambda(lambda: () -> Unit) {
+        println("111")
+        lambda()
+        println("222")
+    }
+
     internal companion object {
         private const val BASE_URL = "https://api.seniverse.com"
         const val CURRENT_WEATHER = "$BASE_URL/v3/weather/now.json"

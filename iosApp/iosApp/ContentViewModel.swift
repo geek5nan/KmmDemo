@@ -15,10 +15,11 @@ class ContentViewModel: ObservableObject {
 
     @Published var uiState: String = ""
     private let logger = Logger()
+    private let greeting = Greeting()
 
     func load() {
         Future<String, Never> { promise in
-            Greeting().getTodayWeather(location: "beijing") { response, error in
+            self.greeting.getTodayWeather(location: "beijing") { response, error in
                 if let response = response {
                     // fetch data by WeatherResponse.
                     self.logger.info("\(response.results[0].now.text)")
@@ -45,6 +46,12 @@ class ContentViewModel: ObservableObject {
 
     init() {
         logger.info("testttt")
+        greeting.funcWithLambda {
+            self.logger.info("functionWithLambda")
+        }
+        greeting.funcWithParams1(someKey: "iOS Key..")
+        greeting.funcWithParam2(someKey: nil)
+
         let integers = (0...3)
         // built-in publisher
         let cancellable1: AnyCancellable = integers.publisher.sink {
