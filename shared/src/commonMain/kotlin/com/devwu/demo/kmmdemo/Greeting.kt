@@ -3,8 +3,10 @@ package com.devwu.demo.kmmdemo
 import com.devwu.demo.kmmdemo.dto.WeatherResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.plugin
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
@@ -23,6 +25,14 @@ class Greeting {
                 isLenient = true
             })
         }
+    }.apply {
+        // 拦截器
+        plugin(HttpSend).intercept { request ->
+            request.parameter("key", "SSSLquKonsbcNF9Gm") // API 密钥
+            request.parameter("language", "zh-Hans")     // API 国际化
+            request.parameter("unit", "c")               // API 数据单位， c 表示摄氏度
+            execute(request)                             // 执行请求
+        }
     }
 
     fun greeting(): String {
@@ -39,16 +49,9 @@ class Greeting {
         const val CURRENT_WEATHER = "$BASE_URL/v3/weather/now.json"
     }
 
-    suspend fun getTodayWeather(
-        location: String = "beijing",
-        language: String = "zh-Hans",
-        unit: String = "c"
-    ): WeatherResponse {
+    suspend fun getTodayWeather(location: String = "beijing"): WeatherResponse {
         return client.get(CURRENT_WEATHER) {
             parameter("location", location)
-            parameter("language", language)
-            parameter("unit", unit)
-            parameter("key", "SSSLquKonsbcNF9Gm")
             contentType(ContentType.Application.Json)
         }.body()
     }

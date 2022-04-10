@@ -18,7 +18,7 @@ class ContentViewModel: ObservableObject {
 
     func load() {
         Future<String, Never> { promise in
-            Greeting().getTodayWeather(location: "beijing", language: "zh-Hans", unit: "c") { response, error in
+            Greeting().getTodayWeather(location: "beijing") { response, error in
                 if let response = response {
                     // fetch data by WeatherResponse.
                     self.logger.info("\(response.results[0].now.text)")
