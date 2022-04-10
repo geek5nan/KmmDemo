@@ -1,0 +1,37 @@
+<configuration debug='false'>
+
+<!--    打印日志到磁盘 -->
+<!--    <property name="LOG_DIR" value="/sdcard/Download/Ktor" />-->
+<!--    <appender name="BASE_ROLL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <append>true</append>-->
+<!--        <encoder>-->
+<!--            <pattern>%date %-5relative [%thread] %-5level %logger{36} [%file:%M:%line] - %msg%n-->
+<!--            </pattern>-->
+<!--        </encoder>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>${LOG_DIR}/%d{yyyyMMdd}.log</fileNamePattern>-->
+<!--            <maxHistory>7</maxHistory>-->
+<!--        </rollingPolicy>-->
+
+<!--        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--            <maxFileSize>10MB</maxFileSize>-->
+<!--        </triggeringPolicy>-->
+<!--    </appender>-->
+<!--    <logger name="ktor.application" level="DEBUG">-->
+<!--        <appender-ref ref="BASE_ROLL_FILE" />-->
+<!--    </logger>-->
+
+<!-- 新建日志 APPENDER，使用 ch.qos.logback 的 logback 实现 -->
+    <appender name="LOGCAT" class="ch.qos.logback.classic.android.LogcatAppender">
+        <encoder>
+<!--            设置日志格式-->
+            <pattern>%-5relative [%thread][%file:%M:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+<!--    设置默认日志等级 TRACE-->
+    <root level="TRACE">
+<!--        关联日志 APPENDER LOGCAT-->
+        <appender-ref ref="LOGCAT" />
+    </root>
+
+</configuration>
